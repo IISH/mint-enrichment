@@ -1,0 +1,8 @@
+@(user: User)
+
+@if(user != null) {
+  <span>
+      <i class="fa fa-user"></i>
+      @user.getFirstName() @user.getLastName()
+  </span>
+}

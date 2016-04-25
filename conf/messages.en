@@ -1,0 +1,11 @@
+title=Mint Enrichment
+
+goback=Go Back
+logout=Logout
+
+invalid.user.or.password=Invalid user or password
+youve.been.logged.out=You've been logged out
+
+signin.signin=Sign in
+signin.your.email=Your login
+signin.your.password=Your password
