@@ -15,7 +15,8 @@ libraryDependencies ++= Seq(
 
   filters,
   "org.webjars" % "jquery" % "2.2.3",
-  "org.webjars" % "bootstrap" % "3.3.6"
+  "org.webjars" % "bootstrap" % "3.3.6",
+  "com.rabbitmq" % "amqp-client" % "2.8.4"
 )
 
 resolvers ++= Seq(
@@ -28,3 +29,6 @@ routesGenerator := InjectedRoutesGenerator
 
 lazy val root = (project in file(".")).enablePlugins(PlayJava, PlayEbean)
 
+
+
+fork in run := true
