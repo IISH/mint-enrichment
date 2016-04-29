@@ -1,11 +1,12 @@
 package controllers;
 
+import messaging.CollectionMessageConnection;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
-import messaging.RabbitMQConnection;
 import messaging.CollectionMessage;
 
+import javax.inject.Inject;
 import java.io.IOException;
 
 /**
@@ -13,14 +14,16 @@ import java.io.IOException;
  */
 @Security.Authenticated(Secured.class)
 public class Message extends Controller {
+    @Inject
+    private CollectionMessageConnection collectionMessageConnection;
 
     public Result testMessage() {
         CollectionMessage c = new CollectionMessage();
         c.setSetId("1004");
         c.setCollectionRecordId("123456789");
-        RabbitMQConnection rbmq = new RabbitMQConnection();
+
         try {
-            rbmq.sendMessage(c);
+            collectionMessageConnection.sendMessage(c);
             return ok("Sent!");
         } catch (IOException e) {
             e.printStackTrace();

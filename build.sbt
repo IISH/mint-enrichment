@@ -11,7 +11,8 @@ libraryDependencies ++= Seq(
   cache,
   "org.json" % "json" % "20160212",
   "org.postgresql" % "postgresql" % "9.4.1208",
-  "org.mongodb" % "mongo-java-driver" % "2.8.0",
+  "org.mongodb" % "mongo-java-driver" % "2.13.2",
+  "com.rabbitmq" % "amqp-client" % "3.6.1",
 
   filters,
   "org.webjars" % "jquery" % "2.2.3",
