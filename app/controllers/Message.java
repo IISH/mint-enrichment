@@ -12,14 +12,14 @@ import java.io.IOException;
 /**
  * Created by Josh on 4/25/16.
  */
-@Security.Authenticated(Secured.class)
+//@Security.Authenticated(Secured.class)
 public class Message extends Controller {
     @Inject
     private CollectionMessageConnection collectionMessageConnection;
 
     public Result testMessage() {
         CollectionMessage c = new CollectionMessage();
-        c.setSetId("1004");
+        c.setSetId(1003);
         c.setCollectionRecordId("123456789");
 
         try {

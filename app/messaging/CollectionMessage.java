@@ -6,23 +6,23 @@ import java.io.Serializable;
  * Created by Josh on 4/25/16.
  */
 public class CollectionMessage implements Serializable {
-    private String setId;
+    private Integer setId;
     private String collectionRecordId;
 
     public CollectionMessage() {
     }
 
-    public CollectionMessage(String setId, String collectionRecordId) {
+    public CollectionMessage(Integer setId, String collectionRecordId) {
         super();
         this.setId = setId;
         this.collectionRecordId = collectionRecordId;
     }
 
-    public String getSetId() {
+    public Integer getSetId() {
         return setId;
     }
 
-    public void setSetId(String setId) {
+    public void setSetId(Integer setId) {
         this.setId = setId;
     }
 
