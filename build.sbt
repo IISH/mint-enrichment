@@ -9,15 +9,18 @@ scalaVersion := "2.11.7"
 libraryDependencies ++= Seq(
   jdbc,
   cache,
+  filters,
+
   "org.json" % "json" % "20160212",
   "org.postgresql" % "postgresql" % "9.4.1208",
   "org.mongodb" % "mongo-java-driver" % "2.13.2",
   "com.rabbitmq" % "amqp-client" % "3.6.1",
 
-  filters,
   "org.webjars" % "jquery" % "2.2.3",
   "org.webjars" % "bootstrap" % "3.3.6",
-  "com.rabbitmq" % "amqp-client" % "2.8.4"
+
+  "org.mockito" % "mockito-all" % "1.10.19" % "test",
+  "xmlunit" % "xmlunit" % "1.6" % "test"
 )
 
 resolvers ++= Seq(
@@ -30,6 +33,7 @@ routesGenerator := InjectedRoutesGenerator
 
 lazy val root = (project in file(".")).enablePlugins(PlayJava, PlayEbean)
 
-
+javaOptions in Test += "-Dconfig.file=conf/application.test.conf"
 
 fork in run := true
+fork in Test := true

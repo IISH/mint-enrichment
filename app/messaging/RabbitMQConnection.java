@@ -59,11 +59,20 @@ public abstract class RabbitMQConnection<T extends Serializable> {
     protected abstract void onMessage(T message);
 
     /**
+     * Creates a factory for RabbitMQ connections.
+     *
+     * @return A RabbitMQ factory.
+     */
+    protected ConnectionFactory getConnectionFactory() {
+        return new ConnectionFactory();
+    }
+
+    /**
      * Sets up the connection and the queue.
      */
     private void start() {
         try {
-            ConnectionFactory factory = new ConnectionFactory();
+            ConnectionFactory factory = getConnectionFactory();
             factory.setHost(HOST_NAME);
 
             connection = factory.newConnection();

@@ -1,0 +1,26 @@
+<rdf:RDF xmlns:crm="http://www.cidoc-crm.org/rdfs/cidoc_crm_v5.0.2_english_label.rdfs#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/"
+         xmlns:edm="http://www.europeana.eu/schemas/edm/" xmlns:foaf="http://xmlns.com/foaf/0.1/"
+         xmlns:ore="http://www.openarchives.org/ore/terms/" xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xmlns:rdaGr2="http://rdvocab.info/ElementsGr2/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+         xmlns:wgs84="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:xalan="http://xml.apache.org/xalan">
+    <edm:ProvidedCHO rdf:about="http://localhost/123.jpg">
+        <dc:creator>Unknown</dc:creator>
+        <dc:date>2016-01-01</dc:date>
+        <dc:description>A description</dc:description>
+        <dc:identifier>123</dc:identifier>
+        <dc:subject>A subject</dc:subject>
+        <dc:title>A title</dc:title>
+        <dcterms:extent>400x500</dcterms:extent>
+        <dcterms:medium>High Quality Paper</dcterms:medium>
+        <dcterms:medium>Digital Camera</dcterms:medium>
+        <edm:type>IMAGE</edm:type>
+    </edm:ProvidedCHO>
+    <ore:Aggregation rdf:about="http://localhost/123.jpg">
+        <edm:aggregatedCHO rdf:resource="http://localhost/123.jpg"/>
+        <edm:isShownAt rdf:resource="hhttp://localhost/123.xml"/>
+        <edm:isShownBy rdf:resource="http://localhost/123.jpg"/>
+        <edm:preview rdf:resource="http://localhost/123.jpg"/>
+    </ore:Aggregation>
+</rdf:RDF>
