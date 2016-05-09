@@ -6,6 +6,8 @@ version := "1.0-SNAPSHOT"
 
 scalaVersion := "2.11.7"
 
+resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots/"
+
 libraryDependencies ++= Seq(
   jdbc,
   cache,
@@ -13,10 +15,9 @@ libraryDependencies ++= Seq(
   "org.postgresql" % "postgresql" % "9.4.1208",
   "org.mongodb" % "mongo-java-driver" % "2.8.0",
 
-  filters,
-  "org.webjars" % "jquery" % "2.2.3",
-  "org.webjars" % "bootstrap" % "3.3.6",
-  "com.rabbitmq" % "amqp-client" % "2.8.4"
+  "com.adrianhurt" %% "play-bootstrap" % "1.1-P25-B3-SNAPSHOT",
+  "com.rabbitmq" % "amqp-client" % "2.8.4",
+  "org.apache.jena" % "jena-arq" % "3.0.1"
 )
 
 resolvers ++= Seq(
@@ -29,6 +30,4 @@ routesGenerator := InjectedRoutesGenerator
 
 lazy val root = (project in file(".")).enablePlugins(PlayJava, PlayEbean)
 
-
-
-fork in run := true
+fork in run := false

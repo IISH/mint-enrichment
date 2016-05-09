@@ -3,8 +3,8 @@ package controllers;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
-import messaging.RabbitMQConnection;
-import messaging.CollectionMessage;
+import util.messaging.RabbitMQConnection;
+import util.messaging.CollectionMessage;
 
 import java.io.IOException;
 

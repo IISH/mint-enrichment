@@ -1,4 +1,4 @@
-package messaging;
+package util.messaging;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;

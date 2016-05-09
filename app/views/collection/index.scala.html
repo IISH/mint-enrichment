@@ -1,0 +1,197 @@
+@(user: User = null, userForm: Form[models.collection.CollectionRecord])
+
+@import b3.vertical.fieldConstructor  // Declares a vertical field constructor as default
+
+@content = {
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active">
+            <a href="#required" role="tab" data-toggle="tab" aria-expanded="true">Required Fields</a>
+        </li>
+        <li role="presentation">
+            <a href="#providedCHO" role="tab" data-toggle="tab" aria-expanded="false">ProvidedCHO</a>
+        </li>
+        <li role="presentation">
+            <a href="#aggregation" role="tab" data-toggle="tab" aria-expanded="false">Aggregation</a>
+        </li>
+        <li role="presentation">
+            <a href="#webResource" role="tab" data-toggle="tab" aria-expanded="fasle">WebResource</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+    @b3.form(routes.Collection.makeCollection) {
+        <div class="tab-pane active fade in" id="required">
+            <div class="col-md-12">
+                <br/>
+                @b3.text(userForm("uuid"), '_label -> "Unique ID", 'placeholder -> "Unique ID", 'readonly -> true)
+                @b3.text(userForm("title"), '_label -> "Title", 'placeholder -> "Title")
+            </div>
+
+            <div class="col-md-6">
+                @b3.select(userForm("type"), options = util.select.EuropeanaType.options, '_label -> "EDM Type")
+            </div>
+            <div class="col-md-6">
+                <label class="control-label" for="description">Languages</label>
+                <div class="repeat-languages">
+                    <div data-repeater-list="languages">
+                    @helper.repeat(userForm("languages"), min = 1) { languageField =>
+                        <div data-repeater-item>
+                            <div class="row">
+                                <div class="col-md-10">
+                                    @b3.select(userForm("languages"), options = util.select.Languages.options,
+                                        '_class -> "select2")
+                                </div>
+                                <div class="col-md-2">
+                                    <span data-repeater-delete="" class="btn btn-danger btn-sm">
+                                        <span class="glyphicon glyphicon-remove"></span> Delete
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    </div>
+                    <div class="form-group">
+                        <span data-repeater-create class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-plus"></span> Add
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                @b3.textarea(userForm("description"), '_label -> "Description", 'placeholder -> "Description")
+            </div>
+            <hr/>
+
+            <div class="col-md-6">
+                <label class="control-label" for="description">Subjects</label>
+                <div class="repeat-subjects">
+                    <div data-repeater-list="subjects">
+                        @helper.repeat(userForm("subjects"), min = 1) { subjectField =>
+                        <div data-repeater-item>
+                            <div class="row">
+                            <div class="col-md-10">
+                                @b3.text(subjectField)
+                            </div>
+                            <div class="col-md-2">
+                                <span data-repeater-delete="" class="btn btn-danger btn-sm">
+                                    <span class="glyphicon glyphicon-remove"></span> Delete
+                                </span>
+                            </div>
+                            </div>
+                        </div>
+                        }
+                    </div>
+                    <div class="form-group">
+                        <span data-repeater-create class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-plus"></span> Add
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label class="control-label" for="description">Collection Sepcific Tags</label>
+                <div class="repeat-hopeTags">
+                    <div data-repeater-list="hopeTags">
+                    @helper.repeat(userForm("hopeTags"), min = 1) { hopeTagField =>
+                        <div data-repeater-item>
+                            <div class="row">
+                                <div class="col-md-10">
+                                    @b3.select(userForm("hopetags"), options = util.select.HopeTags.options,
+                                        '_default -> "-- Select HOPE tags --", '_class -> "select2")
+                                </div>
+                                <div class="col-md-2">
+                                    <span data-repeater-delete="" class="btn btn-danger btn-sm">
+                                        <span class="glyphicon glyphicon-remove"></span> Delete
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    </div>
+                    <div class="form-group">
+                        <span data-repeater-create class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-plus"></span> Add
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label class="control-label" for="description">Coverage</label>
+                <div class="repeat-coverages">
+                    <div data-repeater-list="coverages">
+                    @helper.repeat(userForm("coverages"), min = 1) { coverageField =>
+                        <div data-repeater-item>
+                            <div class="row">
+                                <div class="col-md-10">
+                                    @b3.text(coverageField)
+                                </div>
+                                <div class="col-md-2">
+                                    <span data-repeater-delete="" class="btn btn-danger btn-sm">
+                                        <span class="glyphicon glyphicon-remove"></span> Delete
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    </div>
+                    <div class="form-group">
+                        <span data-repeater-create class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-plus"></span> Add
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label class="control-label" for="description">Spatial Coverage</label>
+                <div class="repeat-spatialCoverages">
+                    <div data-repeater-list="spatialCoverages">
+                    @helper.repeat(userForm("spatialCoverages"), min = 1) { spatialCoverageField =>
+                        <div data-repeater-item>
+                            <div class="row">
+                                <div class="col-md-10">
+                                    @b3.text(spatialCoverageField)
+                                </div>
+                                <div class="col-md-2">
+                                    <span data-repeater-delete="" class="btn btn-danger btn-sm">
+                                        <span class="glyphicon glyphicon-remove"></span> Delete
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    </div>
+                    <div class="form-group">
+                        <span data-repeater-create class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-plus"></span> Add
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="providedCHO">
+
+        </div>
+        <div class="tab-pane fade" id="aggregation">
+
+        </div>
+        <div class="tab-pane fade" id="webResource">
+
+        </div>
+        <div class="col-md-12">
+            <br/>
+            @b3.submit('class -> "btn btn-default") { Create Collection }
+        </div>
+    }
+
+    </div>
+}
+
+@js = {
+    <script src="@routes.Assets.at("javascripts/jquery.repeater.js")"></script>
+    <script src="@routes.Assets.at("javascripts/createCollectionForm.js")"></script>
+    <script src="@routes.Assets.at("javascripts/bootstrapFormHelpers/js/bootstrap-formhelpers.min.js")"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/js/select2.min.js"></script>
+}
+
+@main(user,js)(content)
+
