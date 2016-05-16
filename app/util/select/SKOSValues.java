@@ -56,7 +56,7 @@ public class SKOSValues {
                     concept = entry.getValue();
                 }
             }
-            options.add(Scala.Tuple(label, label));
+            options.add(Scala.Tuple(concept, label));
         }
 
         return options;

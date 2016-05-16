@@ -3,6 +3,9 @@ package util.edm;
 import models.collection.CollectionRecord;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import util.rdf.MINTThesaurus;
+import util.rdf.SKOSThesaurus;
+import util.select.HopeTags;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -45,22 +48,45 @@ public class EDM {
             doc.appendChild(rdf);
 
             /* providedCHO */
+            String providedCHOID = "#providedCHO_" + cr.getUuid();
             Element providedCHO = doc.createElement("edm:providedCHO");
+            providedCHO.setAttribute("rdf:resource", providedCHOID);
             rdf.appendChild(providedCHO);
 
             /* aggregation */
             Element aggregation = doc.createElement("ore:Aggregation");
+            aggregation.setAttribute("rdf:resource", "#aggregation_" + cr.getUuid());
             rdf.appendChild(aggregation);
 
             /* providedCHO elements */
             this.createElement(doc, providedCHO, "dc:title", cr.getTitle());
             this.createElement(doc, providedCHO, "edm:type", cr.getType());
-            this.createElements(doc, providedCHO, "edm:language", cr.getLanguages());
+            this.createElementsLanguages(doc, providedCHO, "dc:language", cr.getLanguages());
             this.createElement(doc, providedCHO, "dc:description", cr.getDescription());
+
             this.createElements(doc, providedCHO, "dc:subject", cr.getSubjects());
-            this.createElements(doc, providedCHO, "dc:subject", cr.getHopeTags());
+            this.createElementsSKOS(doc, providedCHO, "dc:subject",
+                    "http://www.socialhistoryportal.org/themes#HopeThemes", cr.getHopeTags());
+
             this.createElements(doc, providedCHO, "dc:coverage", cr.getCoverages());
             this.createElements(doc, providedCHO, "dcterms:spatial", cr.getSpatialCoverages());
+            this.createElements(doc, providedCHO, "dc:contributor", cr.getContributors());
+            this.createElements(doc, providedCHO, "dc:creator", cr.getCreators());
+            this.createElement(doc, providedCHO, "dcterms:alternative", cr.getAlternative());
+            this.createElement(doc, providedCHO, "dc:date", cr.getDate());
+            this.createElement(doc, providedCHO, "dc:format", cr.getFormat());
+            this.createElement(doc, providedCHO, "dc:source", cr.getSource());
+            this.createElement(doc, providedCHO, "dcterms:extent", cr.getExtent());
+            this.createElement(doc, providedCHO, "dcterms:provenance", cr.getProvenance());
+            this.createElement(doc, providedCHO, "dcterms:tableOfContents", cr.getDate());
+
+            /* Aggregation elements */
+            this.createElementWithResource(doc, aggregation, "edm:aggregatedCHO", "rdf:about", providedCHOID);
+            this.createElement(doc, aggregation, "edm:provider", cr.getProvider());
+            this.createElement(doc, aggregation, "edm:dataProvider", cr.getDataProvider());
+            this.createElementWithResource(doc, aggregation, "edm:isShownAt", "rdf:resource", cr.getIsShownAt());
+            this.createElementWithResource(doc, aggregation, "edm:isShownBy", "rdf:resource", cr.getIsShownBy());
+            this.createElementWithResource(doc, aggregation, "edm:rights", "rdf:resource", cr.getRights());
 
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
@@ -78,12 +104,6 @@ public class EDM {
         return edm;
     }
 
-    private void createElements(Document doc, Element parent, String nodeName, List<String> values) {
-        for (String value : values) {
-            createElement(doc, parent, nodeName, value);
-        }
-    }
-
     private void createElement(Document doc, Element parent, String nodeName, String value) {
         if (value.length() > 0) {
             Element e = doc.createElement(nodeName);
@@ -92,4 +112,49 @@ public class EDM {
         }
     }
 
+    private void createElements(Document doc, Element parent, String nodeName, List<String> values) {
+        for (String value : values) {
+            createElement(doc, parent, nodeName, value);
+        }
+    }
+
+    private void createElementsSKOS(Document doc, Element parent, String nodeName, String conceptScheme, List<String> values) {
+        String repository = "http://mint-sparql.socialhistoryportal.org/HopeThemes/sparql";
+
+        SKOSThesaurus skos = new SKOSThesaurus(repository,
+                null, null, "en", conceptScheme, true);
+
+        for (String value : values) {
+            if (!value.equals("")) {
+                Element e = doc.createElement(nodeName);
+                e.appendChild(doc.createTextNode(skos.getPrefLabel(value, "en")));
+                e.setAttribute("rdf:about", value);
+                parent.appendChild(e);
+            }
+        }
+    }
+
+    private void createElementsLanguages(Document doc, Element parent, String nodeName, List<String> values) {
+        String repository = "http://mint-sparql.socialhistoryportal.org/HopeLanguagesAndCountries/sparql";
+        String conceptScheme = "http://mint.image.ece.ntua.gr/Vocabularies/Languages/LangThesaurus";
+
+        MINTThesaurus skos = new MINTThesaurus(repository,
+                null, null, "en", conceptScheme, true);
+
+        for (String value : values) {
+            if (!value.equals("")) {
+                Element e = doc.createElement(nodeName);
+                e.appendChild(doc.createTextNode(skos.getLanguageCode(value, "en")));
+                parent.appendChild(e);
+            }
+        }
+    }
+
+    private void createElementWithResource(Document doc, Element parent, String nodeName, String attribute, String value) {
+        if (value.length() > 0) {
+            Element e = doc.createElement(nodeName);
+            e.setAttribute(attribute, value);
+            parent.appendChild(e);
+        }
+    }
 }

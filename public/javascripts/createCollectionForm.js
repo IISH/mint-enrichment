@@ -2,6 +2,7 @@
  * Created by Josh on 4/29/16.
  */
 
+
 function formRepeater(element) {
     $(element).repeater({
         show: function () {
@@ -21,5 +22,8 @@ $(document).ready(function() {
     formRepeater(".repeat-spatialCoverages");
     formRepeater(".repeat-hopeTags");
     formRepeater(".repeat-languages");
+    formRepeater(".repeat-contributors");
+    formRepeater(".repeat-creators");
+
 });
 

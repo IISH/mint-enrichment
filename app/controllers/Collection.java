@@ -34,11 +34,11 @@ public class Collection extends Controller {
         User user = User.findByLogin(request().username());
         Form<CollectionRecord> userForm = formFactory.form(CollectionRecord.class).bindFromRequest();
         if (userForm.hasErrors()) {
-            return badRequest();
+            return badRequest(index.render(user, userForm));
         } else {
             CollectionRecord cr = userForm.get();
             EDM edm = new EDM(cr);
-            return ok(edm.createEDM());
+            return ok(edm.createEDM()).as("application/xml");
         }
     }
 }

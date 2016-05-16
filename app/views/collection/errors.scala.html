@@ -1,0 +1,15 @@
+@(userForm: Form[models.collection.CollectionRecord])
+
+@if(userForm.hasGlobalErrors) {
+    <div class="alert alert-danger">
+    @for(error <- userForm.globalErrors) {
+        <p>@Messages(error.messages, error.arguments.toArray: _*)</p>
+    }
+    </div>
+}
+
+@for(error <- userForm("hopeTags").errors) {
+    <div class="alert alert-danger">
+        <p>@Messages(error.messages, error.arguments.toArray: _*)</p>
+    </div>
+}

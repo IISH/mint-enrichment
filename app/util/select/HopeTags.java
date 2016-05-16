@@ -1,6 +1,8 @@
 package util.select;
 
 import scala.Tuple2;
+import util.rdf.SKOSThesaurus;
+
 import java.util.List;
 
 /**

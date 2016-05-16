@@ -1,0 +1,173 @@
+@(userForm: Form[models.collection.CollectionRecord])
+@import b3.vertical.fieldConstructor  // Declares a vertical field constructor as default
+
+<div class="tab-pane fade in" id="providedCHO">
+    <br/>
+
+    <div class="col-md-12">
+        @b3.text(userForm("alternative"), '_label -> "Aternative Title")
+    </div>
+
+    <div class="col-md-6">
+        @b3.text(userForm("date"), '_label -> "Date")
+    </div>
+
+    <div class="col-md-6">
+        @b3.text(userForm("format"), '_label -> "Format")
+    </div>
+
+    <div class="col-md-6">
+        <label class="control-label" for="description">Subjects</label>
+        <div class="repeat-subjects">
+            <div data-repeater-list="subjects">
+            @helper.repeat(userForm("subjects"), min = 1) { subjectField =>
+                <div data-repeater-item>
+                    <div class="row">
+                        <div class="col-md-10">
+                            @b3.text(subjectField)
+                        </div>
+                        <div class="col-md-2">
+                            <span data-repeater-delete="" class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove"></span> Delete
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            }
+            </div>
+            <div class="form-group">
+                <span data-repeater-create class="btn btn-info btn-sm">
+                    <span class="glyphicon glyphicon-plus"></span> Add
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <label class="control-label" for="description">Coverage</label>
+        <div class="repeat-coverages">
+            <div data-repeater-list="coverages">
+            @helper.repeat(userForm("coverages"), min = 1) { coverageField =>
+                <div data-repeater-item>
+                    <div class="row">
+                        <div class="col-md-10">
+                            @b3.text(coverageField)
+                        </div>
+                        <div class="col-md-2">
+                            <span data-repeater-delete="" class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove"></span> Delete
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            }
+            </div>
+            <div class="form-group">
+                <span data-repeater-create class="btn btn-info btn-sm">
+                    <span class="glyphicon glyphicon-plus"></span> Add
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <label class="control-label" for="description">Spatial Coverage</label>
+        <div class="repeat-spatialCoverages">
+            <div data-repeater-list="spatialCoverages">
+            @helper.repeat(userForm("spatialCoverages"), min = 1) { spatialCoverageField =>
+                <div data-repeater-item>
+                    <div class="row">
+                        <div class="col-md-10">
+                            @b3.text(spatialCoverageField)
+                        </div>
+                        <div class="col-md-2">
+                            <span data-repeater-delete="" class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove"></span> Delete
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            }
+            </div>
+            <div class="form-group">
+                <span data-repeater-create class="btn btn-info btn-sm">
+                    <span class="glyphicon glyphicon-plus"></span> Add
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <label class="control-label" for="description">Contributors</label>
+        <div class="repeat-contributors">
+            <div data-repeater-list="contributors">
+            @helper.repeat(userForm("contributors"), min = 1) { contributorFields =>
+                <div data-repeater-item>
+                    <div class="row">
+                        <div class="col-md-10">
+                            @b3.text(contributorFields)
+                        </div>
+                        <div class="col-md-2">
+                            <span data-repeater-delete="" class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove"></span> Delete
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            }
+            </div>
+            <div class="form-group">
+                <span data-repeater-create class="btn btn-info btn-sm">
+                    <span class="glyphicon glyphicon-plus"></span> Add
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <label class="control-label" for="description">Creators</label>
+        <div class="repeat-creators">
+            <div data-repeater-list="creators">
+            @helper.repeat(userForm("creators"), min = 1) { creatorFields =>
+                <div data-repeater-item>
+                    <div class="row">
+                        <div class="col-md-10">
+                            @b3.text(creatorFields)
+                        </div>
+                        <div class="col-md-2">
+                            <span data-repeater-delete="" class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove"></span> Delete
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            }
+            </div>
+            <div class="form-group">
+                <span data-repeater-create class="btn btn-info btn-sm">
+                    <span class="glyphicon glyphicon-plus"></span> Add
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        @b3.text(userForm("Publisher"), '_label -> "Publisher")
+    </div>
+
+    <div class="col-md-6">
+        @b3.text(userForm("Source"), '_label -> "Source")
+    </div>
+
+    <div class="col-md-6">
+        @b3.textarea(userForm("Extent"), '_label -> "Extent")
+    </div>
+
+    <div class="col-md-6">
+        @b3.textarea(userForm("Provenance"), '_label -> "Provenance")
+    </div>
+
+    <div class="col-md-12">
+        @b3.textarea(userForm("tableOfContents"), '_label -> "Table of Contents")
+    </div>
+</div>

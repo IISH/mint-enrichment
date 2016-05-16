@@ -1,0 +1,33 @@
+@(userForm: Form[models.collection.CollectionRecord])
+@import b3.vertical.fieldConstructor  // Declares a vertical field constructor as default
+
+<div class="tab-pane fade in" id="hopetags">
+    <br/>
+    <div class="col-md-12">
+        <label class="control-label" for="description">Collection Sepcific Tags</label>
+        <div class="repeat-hopeTags">
+            <div data-repeater-list="hopeTags">
+            @helper.repeat(userForm("hopeTags"), min = 1) { hopeTagField =>
+                <div data-repeater-item>
+                    <div class="row">
+                        <div class="col-md-10">
+                            @b3.select(userForm("hopetags"), options = util.select.HopeTags.options,
+                                '_default -> "-- Select HOPE tags --", '_class -> "select2")
+                        </div>
+                        <div class="col-md-2">
+                            <span data-repeater-delete="" class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove"></span> Delete
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            }
+            </div>
+            <div class="form-group">
+                <span data-repeater-create class="btn btn-info btn-sm">
+                    <span class="glyphicon glyphicon-plus"></span> Add
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

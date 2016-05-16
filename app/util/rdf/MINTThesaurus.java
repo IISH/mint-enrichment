@@ -4,7 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 public class MINTThesaurus extends SKOSThesaurus {
-	
+	static String MINT = "PREFIX mint:<http://mint.image.ece.ntua.gr/properties/>\n";
+
 	public MINTThesaurus(String repository, String[] collections,String[] rdfDatasets, 
 			String language, String conceptScheme, boolean defaultIncluded){
 		super(repository, collections,rdfDatasets, language, conceptScheme,defaultIncluded);
@@ -119,6 +120,26 @@ public class MINTThesaurus extends SKOSThesaurus {
 				"}\n";
 		System.out.println(query);
 		return Repository.queryMapList(repository, query);
+	}
+
+	public String getLanguageCode(String concept, String lang) {
+		String select = "SELECT (str(?language_code) as ?label) \n";
+		String condition = "	<" + concept + "> skos:prefLabel ?prefLabel.\n" +
+				"    <" + concept + "> mint:iso_639_1 ?language_code \n";
+		String filter = "	FILTER( \n" +
+				"		langMatches( lang(?prefLabel), \"" +
+				((like != null) ? language : lang) +
+				"\" ) \n" +
+				((like != null) ? "			&& contains(lcase(?prefLabel), \"" + like + "\" ) \n" : "") +
+				"	) \n";
+		String query = SKOS + MINT + select +
+				"WHERE \n{\n" +
+				((defaultIncluded) ? condition : "") +
+//				 graphs + "\n" +
+				filter +
+				"}";
+		String r = Repository.queryFirst(repository, query);
+		return Repository.queryFirst(repository, query);
 	}
 
 	public static void main(String[] args){
