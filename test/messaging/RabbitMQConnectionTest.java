@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import play.inject.ApplicationLifecycle;
+import util.messaging.RabbitMQConnection;
 
 import java.io.*;
 import java.util.concurrent.Callable;

@@ -4,7 +4,7 @@ import messaging.CollectionMessageConnection;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
-import messaging.CollectionMessage;
+import util.messaging.CollectionMessage;
 
 import javax.inject.Inject;
 import java.io.IOException;

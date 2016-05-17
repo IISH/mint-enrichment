@@ -20,7 +20,9 @@ libraryDependencies ++= Seq(
   "org.webjars" % "bootstrap" % "3.3.6",
 
   "org.mockito" % "mockito-all" % "1.10.19" % "test",
-  "xmlunit" % "xmlunit" % "1.6" % "test"
+  "xmlunit" % "xmlunit" % "1.6" % "test",
+  "com.adrianhurt" % "play-bootstrap_2.11" % "1.0-P25-B3",
+  "org.apache.jena" % "jena-arq" % "3.0.1"
 )
 
 resolvers ++= Seq(
@@ -35,5 +37,5 @@ lazy val root = (project in file(".")).enablePlugins(PlayJava, PlayEbean)
 
 javaOptions in Test += "-Dconfig.file=conf/application.test.conf"
 
-fork in run := true
+fork in run := false
 fork in Test := true

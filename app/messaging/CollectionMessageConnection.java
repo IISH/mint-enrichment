@@ -3,6 +3,8 @@ package messaging;
 import com.typesafe.config.ConfigFactory;
 import enrichment.CollectionRecordUpdater;
 import play.inject.ApplicationLifecycle;
+import util.messaging.CollectionMessage;
+import util.messaging.RabbitMQConnection;
 import utils.MongoDB;
 
 import javax.inject.Inject;

@@ -5,7 +5,7 @@ import com.mongodb.BulkWriteOperation;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.typesafe.config.ConfigFactory;
-import messaging.CollectionMessage;
+import util.messaging.CollectionMessage;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 import play.Logger;

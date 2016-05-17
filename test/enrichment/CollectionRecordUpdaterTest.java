@@ -1,7 +1,7 @@
 package enrichment;
 
 import com.mongodb.*;
-import messaging.CollectionMessage;
+import util.messaging.CollectionMessage;
 import org.apache.commons.io.IOUtils;
 import org.custommonkey.xmlunit.XMLAssert;
 import org.custommonkey.xmlunit.XMLUnit;
